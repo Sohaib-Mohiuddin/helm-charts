@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "spring-boot-restapi-mongo.fullname" . }}
+  labels:
+    {{- include "spring-boot-restapi-mongo.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      nodePort: {{ .Values.service.exposePort }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "spring-boot-restapi-mongo.selectorLabels" . | nindent 4 }}
