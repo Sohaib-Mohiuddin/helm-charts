@@ -15,7 +15,7 @@ fullnameOverride: ""
 
 service:
   type: NodePort
-  port: 80
+  port: 8080
   targetPort: 8080
   exposePort: 30111
 
