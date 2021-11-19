@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "simple-springboot-webservice-producer.fullname" . }}
+  labels:
+    {{- include "simple-springboot-webservice-producer.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      nodePort: {{ .Values.service.exposePort }}
+      targetPort: {{ .Values.service.targetPort }}
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "simple-springboot-webservice-producer.selectorLabels" . | nindent 4 }}
